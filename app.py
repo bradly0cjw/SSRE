@@ -27,6 +27,10 @@ csp = {
     'script-src': [
         '\'self\'',
         'https://cdn.jsdelivr.net'
+    ],
+    'img-src': [            
+        '\'self\'',
+        'data:'             
     ]
 }
 
