@@ -30,7 +30,7 @@ csp = {
     ],
     'img-src': [            
         '\'self\'',
-        'data:'             
+        'data:'             # Allows the Base64 QR code to display
     ]
 }
 
