@@ -10,10 +10,27 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 from werkzeug.security import generate_password_hash, check_password_hash
+
+from flask_talisman import Talisman
 import re
 
 # Initialize Flask app
 app = Flask(__name__)
+
+# Content Security Policy
+csp = {
+    'default-src': '\'self\'',
+    'style-src': [
+        '\'self\'',
+        'https://cdn.jsdelivr.net'
+    ],
+    'script-src': [
+        '\'self\'',
+        'https://cdn.jsdelivr.net'
+    ]
+}
+
+Talisman(app, content_security_policy=csp)
 
 # Configuration
 # Security: Secret key should be a strong random value. In production, use os.environ.get('SECRET_KEY')

@@ -9,7 +9,7 @@ A secure Flask application demonstrating best practices for user authentication,
 - **Session Security**: Secure cookie configuration (`HttpOnly`, `SameSite=Lax`).
 - **Vulnerability Protection**:
   - **SQL Injection (SQLi)**: Prevented via SQLAlchemy ORM.
-  - **Cross-Site Scripting (XSS)**: Prevented via Jinja2 auto-escaping.
+  - **Cross-Site Scripting (XSS)**: Prevented via Jinja2 auto-escaping and Content Security Policy (CSP).
   - **Cross-Site Request Forgery (CSRF)**: Prevented via Flask-WTF tokens.
   - **Rainbow Table Attacks**: Prevented via salted password hashing.
   - **Insecure Direct Object References (IDOR)**: Prevented by session-based user context.
@@ -45,6 +45,7 @@ Use this guide to verify the security measures implemented in the application.
 - **Test**: Go to the Registration page.
 - **Payload**: Enter `<script>alert('XSS')</script>` as the Username.
 - **Expected Result**: After registration (if length allows) or upon display, the script **does not execute**. The username is displayed as plain text (e.g., `&lt;script&gt;...`). This is due to Jinja2's automatic HTML escaping.
+- **Defense Layer 2 (CSP)**: Even if auto-escaping failed, the **Content Security Policy (CSP)** would block the inline script execution, as `script-src` is restricted to `'self'` and trusted CDNs.
 
 ### 3. Cross-Site Request Forgery (CSRF)
 **Goal**: Force a user to perform an action (like changing a password) without their consent.
