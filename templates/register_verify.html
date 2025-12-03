@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+        <div class="card">
+            <div class="card-header">Setup MFA</div>
+            <div class="card-body p-4">
+                <h4 class="mb-3">Scan QR Code</h4>
+                <p>Scan this QR code with your Authenticator App (Google Authenticator, Authy, etc.)</p>
+                <img src="data:image/png;base64,{{ qr_code }}" alt="MFA QR Code"
+                    class="img-fluid mb-4 rounded border border-secondary">
+
+                <h4 class="mb-3">Verify Code</h4>
+                <p>Enter the 6-digit code to complete registration.</p>
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3 d-flex justify-content-center">
+                        {{ form.otp(class="form-control form-control-lg text-center w-50", placeholder="000000",
+                        autocomplete="off", maxlength="6") }}
+                    </div>
+                    {% for error in form.otp.errors %}
+                    <span class="text-danger d-block mb-3">{{ error }}</span>
+                    {% endfor %}
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        {{ form.submit(class="btn btn-primary btn-lg") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

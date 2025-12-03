@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header text-center">MFA Verification</div>
+            <div class="card-body p-4 text-center">
+                <p class="mb-4">Please enter the 6-digit code from your Authenticator App.</p>
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-4">
+                        {{ form.otp(class="form-control form-control-lg text-center", placeholder="000000",
+                        autocomplete="off", maxlength="6") }}
+                        {% for error in form.otp.errors %}
+                        <span class="text-danger d-block mt-2">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="d-grid gap-2">
+                        {{ form.submit(class="btn btn-primary btn-lg") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

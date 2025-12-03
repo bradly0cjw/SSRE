@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+        <h2>Registration Successful!</h2>
+        <p>Please scan the QR code below with your Authenticator App (Google Authenticator, Authy, etc.) to set up MFA.
+        </p>
+        <img src="data:image/png;base64,{{ qr_code }}" alt="MFA QR Code" class="img-fluid mb-3">
+        <p>After scanning, please <a href="{{ url_for('login') }}">Login</a> to verify and access your account.</p>
+    </div>
+</div>
+{% endblock %}
